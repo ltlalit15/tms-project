@@ -1,15 +1,13 @@
 const Dispute = require("../models/dispute.model");
 
 // CREATE DISPUTE (Agent / Finance)
+// CREATE DISPUTE (Agent / Finance)
 exports.createDispute = async (req, res) => {
   try {
-    const dispute = await Dispute.create({
-      ...req.body,
-      createdBy: req.user.id
-    });
-
+    const dispute = await Dispute.create(req.body);
     res.json({ success: true, message: "Dispute created", dispute });
   } catch (error) {
+    console.error("Dispute creation error:", error); // ✅ log the error
     res.status(500).json({ success: false, message: error.message });
   }
 };
